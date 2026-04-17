@@ -1,13 +1,14 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const logger = require("../../../helper/logger");
+const logger = require("../../../common/logger");
 
 exports.register = async (req, res) => {
-  logger.info(
-    "Register user",
-    req.traceId
+  logger.info("Register user", {
+      traceId: req.traceId
+    }
   );
+  
   const { email, password } = req.body;
 
   const hashed = await bcrypt.hash(password, 10);
@@ -21,9 +22,9 @@ exports.register = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  logger.info(
-    "Login user",
-    req.traceId
+  logger.info("Login user", {
+      traceId: req.traceId
+    }
   );
   const { email, password } = req.body;
 

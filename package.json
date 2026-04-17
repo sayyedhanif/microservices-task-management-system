@@ -1,0 +1,22 @@
+{
+  "name": "microservices-task-management-system",
+  "version": "1.0.0",
+  "description": "### Node.js Microservices Task Management System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sayyedhanif/microservices-task-management-system.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sayyedhanif/microservices-task-management-system/issues"
+  },
+  "homepage": "https://github.com/sayyedhanif/microservices-task-management-system#readme",
+  "dependencies": {
+    "uuid": "^13.0.0"
+  }
+}

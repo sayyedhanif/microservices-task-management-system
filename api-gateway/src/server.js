@@ -4,18 +4,21 @@ const express = require("express");
 const proxy = require("express-http-proxy");
 
 const authMiddleware = require("./middleware/auth");
-const logHttpReq = require("./middleware/logHttpReq");
-const trace = require("./middleware/trace");
-const port = process.env.PORT || 3000;
+const traceMiddleware = require("../../common/traceMiddleware");
+const requestLogger = require("../../common/requestLogger");
+const logger = require("../../common/logger");
 
+const port = process.env.PORT || 3000;
 const app = express();
+
+// Middleware configuration
 app.use(express.json());
 
 // trace middleware
-app.use(trace)
+app.use(traceMiddleware);
 
 // logs http request
-app.use(logHttpReq);
+app.use(requestLogger);
 
 // micro services with proxy redirect
 app.use("/auth",
@@ -38,10 +41,11 @@ app.use(
   })
 );
 
-
 // attach apps routes
 app.use("/", require("./routes"));
 
 app.listen(port, () =>
-  console.log(`API Gateway server running on port ${port}`)
+  logger.info(`API Gateway server running on port ${port}`, {
+    traceId: "server-started"
+  })
 );

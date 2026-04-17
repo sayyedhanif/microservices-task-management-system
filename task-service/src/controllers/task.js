@@ -1,12 +1,11 @@
 
-const logger = require("../../../helper/logger");
+const logger = require("../../../common/logger");
 const Task = require("../models/Task");
 
 exports.createTask = async (req, res) => {
-  logger.info(
-    "Adding task",
-    req.traceId
-  );
+  logger.info("Adding task", {
+    traceId: req.traceId
+  });
 
   const user = req.headers['x-user'] ? JSON.parse(req.headers['x-user']) : {};
 
@@ -18,10 +17,9 @@ exports.createTask = async (req, res) => {
 };
 
 exports.getTasksList = async (req, res) => {
-  logger.info(
-    "Fetching tasks",
-    req.traceId
-  );
+  logger.info("Fetching tasks", {
+    traceId: req.traceId
+  });
 
   const tasks = await Task.find();
   res.json(tasks || []);
